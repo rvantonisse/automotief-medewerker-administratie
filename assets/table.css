@@ -1,0 +1,59 @@
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+table {
+    position: relative;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+    letter-spacing: 0;
+}
+
+thead {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    border: 1px solid #d2d2d2;
+    background-color: #d7d7d7;
+    background: linear-gradient(to top, #d2d2d2, #e7e7e7 15%, #fdfdfd);
+}
+
+tr + tr {
+    border-top: solid 1px #ccc;
+}
+
+tr:nth-of-type(even) > td {
+    background-color: #e6eef4;
+}
+
+tr:hover > td {
+    background-color: #c4e1a8;
+}
+
+tr.inactive > td {
+    /* Darker color to meet accessible contrast; from #999 to #666 */
+    color: #666;
+    background-color: #eee;
+}
+
+th {
+    text-align: left;
+}
+
+th,
+td {
+    padding: 0.25rem;
+}
+
+td.number,
+td.date {
+    text-align: right;
+}

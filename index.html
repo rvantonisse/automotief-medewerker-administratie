@@ -55,6 +55,42 @@
                 min-height: 6rem;
             }
         </style>
+
+        <style>
+            /* Table context specific styles */
+            tr.inactive > td .salary {
+                text-decoration: line-through;
+            }
+
+            tr.inactive > td.status * {
+                display: none;
+            }
+
+            /* Status styles */
+            .present,
+            .absent,
+            .out-of-office {
+                border: solid 1px currentColor;
+                border-left-width: 0.5rem;
+                border-radius: 5px;
+                padding: 0.125rem 0.25rem;
+                font-size: 0.75rem;
+            }
+
+            .present {
+                border-color: orange;
+            }
+
+            .absent {
+                border-color: red;
+            }
+
+            .out-of-office {
+                border-color: grey;
+            }
+        </style>
+
+        <link rel="stylesheet" href="/assets/styles.css" />
     </head>
 
     <body>
@@ -78,183 +114,263 @@
                 <tbody>
                     <tr>
                         <td>Saskia de Bruin</td>
-                        <td>99</td>
+                        <td class="number">99</td>
                         <td>Medewerker</td>
-                        <td>1986-01-01</td>
-                        <td>buiten</td>
+                        <td>1-1-1986</td>
+                        <td class="status">
+                            <span class="out-of-office">buiten</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2134</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2134</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Marina Fruithal</td>
-                        <td>217</td>
+                        <td class="number">217</td>
                         <td>Monteur</td>
-                        <td>2000-07-25</td>
-                        <td>aanwezig</td>
+                        <td>25-7-2000</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td>Werkt vandaag aan de Volvo XC40</td>
-                        <td><span>€</span> 2381</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2381</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Coen Toermalijn</td>
-                        <td>227</td>
+                        <td class="number">227</td>
                         <td>Inkoop</td>
-                        <td>2019-08-29</td>
-                        <td>afwezig</td>
+                        <td>29-8-2019</td>
+                        <td class="status">
+                            <span class="absent">afwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2712</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2712</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Ton Deuse</td>
-                        <td>360</td>
+                        <td class="number">360</td>
                         <td>Medewerker</td>
-                        <td>2015-03-25</td>
-                        <td>aanwezig</td>
+                        <td>25-3-2015</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2531</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2531</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Joyse Boekenlegger</td>
-                        <td>432</td>
+                        <td class="number">432</td>
                         <td>Spuiter</td>
-                        <td>2012-02-16</td>
-                        <td>aanwezig</td>
+                        <td>16-2-2012</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2338</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2338</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Dino Kruiswijk</td>
-                        <td>497</td>
+                        <td class="number">497</td>
                         <td>Salaris administratie</td>
-                        <td>2012-05-16</td>
-                        <td>aanwezig</td>
+                        <td>16-5-2012</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2467</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2467</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>David van Oldenbarneveld</td>
-                        <td>519</td>
+                        <td class="number">519</td>
                         <td>Medewerker</td>
-                        <td>1996-04-01</td>
-                        <td>afwezig</td>
+                        <td>1-4-1996</td>
+                        <td class="status">
+                            <span class="absent">afwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2134</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2134</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Merel van Giesen</td>
-                        <td>543</td>
+                        <td class="number">543</td>
                         <td>Monteur</td>
-                        <td>2005-09-12</td>
-                        <td>buiten</td>
+                        <td>12-9-2005</td>
+                        <td class="status">
+                            <span class="out-of-office">buiten</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2188</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2188</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Sandra Anderson</td>
-                        <td>591</td>
+                        <td class="number">591</td>
                         <td>Sloper</td>
-                        <td>2017-08-24</td>
-                        <td>aanwezig</td>
+                        <td>24-8-2017</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 1876</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">1876</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Koos Kastenmaker</td>
-                        <td>600</td>
+                        <td class="number">600</td>
                         <td>Medewerker</td>
-                        <td>2014-11-29</td>
-                        <td>aanwezig</td>
+                        <td>29-11-2014</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2134</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2134</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Druze Saliman</td>
-                        <td>601</td>
+                        <td class="number">601</td>
                         <td>Inkoop</td>
-                        <td>2006-03-17</td>
-                        <td>afwezig</td>
+                        <td>17-3-2006</td>
+                        <td class="status">
+                            <span class="absent">afwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2712</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2712</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Patrick van Bergenhenegouwe</td>
-                        <td>631</td>
+                        <td class="number">631</td>
                         <td>Administratie</td>
-                        <td>2011-10-19</td>
-                        <td>aanwezig</td>
+                        <td>19-10-2011</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2136</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2136</span>
+                        </td>
                     </tr>
-                    <tr>
+                    <tr class="inactive">
                         <td>Freek Alexander</td>
-                        <td>631</td>
+                        <td class="number">631</td>
                         <td>Administratie</td>
-                        <td>2019-12-20</td>
-                        <td>aanwezig</td>
+                        <td>20-12-2019</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2136</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2136</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Simone Bruinsma</td>
-                        <td>737</td>
+                        <td class="number">737</td>
                         <td>Manager</td>
-                        <td>2013-10-07</td>
-                        <td>aanwezig</td>
+                        <td>7-10-2013</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 3267</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">3267</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Ronnie Stuiverwaard</td>
-                        <td>750</td>
+                        <td class="number">750</td>
                         <td>Medewerker</td>
-                        <td>2015-08-05</td>
-                        <td>aanwezig</td>
+                        <td>5-8-2015</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td>Volgende week op locatie</td>
-                        <td><span>€</span> 2244</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2244</span>
+                        </td>
                     </tr>
-                    <tr>
+                    <tr class="inactive">
                         <td>Koos Deuse</td>
-                        <td>841</td>
+                        <td class="number">841</td>
                         <td>Sloper</td>
-                        <td>2014-10-11</td>
-                        <td>aanwezig</td>
+                        <td>11-10-2014</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 1954</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">1954</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Stephan Weezerik</td>
-                        <td>871</td>
+                        <td class="number">871</td>
                         <td>Sales</td>
-                        <td>2011-07-06</td>
-                        <td>aanwezig</td>
+                        <td>6-7-2011</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td>Administratie bijwerken</td>
-                        <td><span>€</span> 2654</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2654</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Jacco Cornee</td>
-                        <td>975</td>
+                        <td class="number">975</td>
                         <td>Monteur</td>
-                        <td>2003-04-19</td>
-                        <td>buiten</td>
+                        <td>19-4-2003</td>
+                        <td class="status">
+                            <span class="out-of-office">buiten</span>
+                        </td>
                         <td>Wagen ophalen</td>
-                        <td><span>€</span> 2251</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2251</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Bente Jansen</td>
-                        <td>1000</td>
+                        <td class="number">1000</td>
                         <td>Senior Monteur</td>
-                        <td>2020-01-08</td>
-                        <td>buiten</td>
+                        <td>8-1-2020</td>
+                        <td class="status">
+                            <span class="out-of-office">buiten</span>
+                        </td>
                         <td></td>
-                        <td><span>€</span> 2134</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2134</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Mark Ronson</td>
-                        <td>1208</td>
+                        <td class="number">1208</td>
                         <td>Monteur</td>
-                        <td>1999-06-22</td>
-                        <td>aanwezig</td>
+                        <td>22-6-1999</td>
+                        <td class="status">
+                            <span class="present">aanwezig</span>
+                        </td>
                         <td>Vandaag auto's aan het ophalen</td>
-                        <td><span>€</span> 2268</td>
+                        <td class="number">
+                            <span>€</span> <span class="salary">2268</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>

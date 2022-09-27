@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html lang="nl-NL" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medewerker administratie Automotief</title>
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Medewerker administratie Automotief</title>
 
-<body>
-    <header></header>
-    <main></main>
-</body>
+        <style>
+            html,
+            body,
+            main {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+
+            body {
+                font-family: system-ui, sans-serif;
+                letter-spacing: 0.2rem;
+                word-spacing: 0.1rem;
+                line-height: 1.5;
+                color: #363636;
+                background-color: #fff;
+            }
+
+            body > header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 2rem 2.5rem 1rem;
+                padding-block-start: 2rem;
+                padding-block-end: 1rem;
+                padding-inline: 2.5rem;
+                background-color: #ba5672;
+                background-image: linear-gradient(20deg, #ba5672, #c44c6a, #aa468a, #8446b1, #7846bd);
+                box-shadow: 0 5px 5px 0 #36363666;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            body > header .title {
+                color: #fff;
+            }
+
+            body > header img {
+                min-height: 6rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <img alt="Automotief, Intus garage Utrecht" />
+            <span class="title">Medewerker administratie</span>
+        </header>
+        <main></main>
+    </body>
 </html>

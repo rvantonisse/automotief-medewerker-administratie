@@ -1,20 +1,23 @@
 {
-  "name": "automotief-medewerker-administratie",
-  "version": "0.0.1",
-  "description": "(NL) Medewerker administratie pagina met aanpasbaar overzichtstabel van alle medewerkers.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rvantonisse/automotief-medewerker-administratie.git"
-  },
-  "keywords": [],
-  "author": "Roel Antonisse",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rvantonisse/automotief-medewerker-administratie/issues"
-  },
-  "homepage": "https://github.com/rvantonisse/automotief-medewerker-administratie#readme"
+    "name": "automotief-medewerker-administratie",
+    "version": "0.0.1",
+    "description": "(NL) Medewerker administratie pagina met aanpasbaar overzichtstabel van alle medewerkers.",
+    "main": "index.js",
+    "scripts": {
+        "start": "web-dev-server --node-resolve --open --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rvantonisse/automotief-medewerker-administratie.git"
+    },
+    "keywords": [],
+    "author": "Roel Antonisse",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rvantonisse/automotief-medewerker-administratie/issues"
+    },
+    "homepage": "https://github.com/rvantonisse/automotief-medewerker-administratie#readme",
+    "devDependencies": {
+        "@web/dev-server": "^0.1.34"
+    }
 }

@@ -11,23 +11,41 @@ td {
 
 table {
     position: relative;
+    display: block;
     table-layout: fixed;
     border-collapse: collapse;
     border-spacing: 0;
+    width: 100%;
     letter-spacing: 0;
+    overflow-x: auto;
+}
+
+thead,
+tbody,
+tfoot,
+tr {
+    width: 100%;
 }
 
 thead {
+    /* position: -webkit-sticky;
+    position: sticky;
+    top: 0; */
+}
+
+tbody {
+    white-space: nowrap;
+    overflow-y: auto;
+}
+
+tfoot {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    border: 1px solid #d2d2d2;
-    background-color: #d7d7d7;
-    background: linear-gradient(to top, #d2d2d2, #e7e7e7 15%, #fdfdfd);
 }
 
-tr + tr {
-    border-top: solid 1px #ccc;
+tr:not(tr:last-child) {
+    border-bottom: solid 1px #ccc;
 }
 
 tr:nth-of-type(even) > td {
@@ -44,13 +62,66 @@ tr.inactive > td {
     background-color: #eee;
 }
 
-th {
+thead th {
+    border-top: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    background-color: #d7d7d7;
+    background: linear-gradient(to top, #d2d2d2, #e7e7e7 15%, #fdfdfd);
     text-align: left;
 }
 
 th,
 td {
+    position: relative;
+    z-index: 0;
     padding: 0.25rem;
+    min-width: 3rem;
+    width: 1%;
+}
+
+th:last-child,
+td:last-child {
+    padding-left: 1.25rem;
+    position: relative;
+    z-index: 1;
+}
+
+th:last-child::before,
+td:last-child::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: calc(100% + 2px);
+    width: 1rem;
+    background-color: white;
+    z-index: 1;
+    border: solid 1px transparent;
+}
+
+td:last-child::before {
+    left: 1px;
+    width: calc(1rem - 2px);
+}
+
+thead th:first-child {
+    border-left: solid 1px #d2d2d2;
+}
+
+thead th:last-child {
+    border-right-color: #d2d2d2;
+}
+
+th:last-child::before {
+    border-left: solid 1px #d2d2d2;
+    border-right: solid 1px #d2d2d2;
+}
+
+
+td:not(td:last-child) {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 td.number,

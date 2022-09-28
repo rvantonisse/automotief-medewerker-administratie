@@ -55,8 +55,8 @@
                 member.status
             }</span></td>
                     <td>${member.remark}</td>
-                    <td class="number"><span>€</span> <span class="salary">${
-                        member.salary
+                    <td class="number"><span class="currency">€</span> <span class="salary">${
+                        new Number(member.salary).toLocaleString("nl")
                     }</span></td>
                 </tr>`
         );

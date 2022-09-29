@@ -6,12 +6,16 @@
         <title>Medewerker administratie Automotief</title>
 
         <style>
+            * {
+                box-sizing: border-box;
+            }
+
             html,
             body,
             main {
                 margin: 0;
                 padding: 0;
-                height: 100%;
+                min-height: 100%;
             }
 
             body {
@@ -24,15 +28,19 @@
             }
 
             body > header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
                 padding: 2rem 2.5rem 1rem;
                 padding-block-start: 2rem;
                 padding-block-end: 1rem;
                 padding-inline: 2.5rem;
                 background-color: #ba5672;
-                background-image: linear-gradient(20deg, #ba5672, #c44c6a, #aa468a, #8446b1, #7846bd);
+                background-image: linear-gradient(
+                    20deg,
+                    #ba5672,
+                    #c44c6a,
+                    #aa468a,
+                    #8446b1,
+                    #7846bd
+                );
                 box-shadow: 0 5px 5px 0 #36363666;
             }
 
@@ -47,14 +55,730 @@
             body > header img {
                 min-height: 6rem;
             }
+
+            /* Layout */
+            main {
+                padding: 3rem 0;
+                padding-block: 3rem;
+            }
+
+            .content {
+                margin: 0 auto;
+                margin-inline: auto;
+                padding: 0 1rem;
+                width: 100%;
+                max-width: 60rem;
+            }
+
+            .flex {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .scrollview {
+                position: relative;
+                display: block;
+                width: 100%;
+                overflow: scroll;
+
+                /*
+                    Required to make a fixed height, to get table headers to stick;
+                    16 rows in view, each row is 2rem + 1px border high
+                */
+                max-height: calc(16 * (2rem + 1px));
+            }
         </style>
+
+        <style>
+            /* Table context specific styles */
+            tr.inactive > td .salary {
+                text-decoration: line-through;
+            }
+
+            td > .currency {
+                float: left;
+            }
+
+            tr.inactive > td.status * {
+                display: none;
+            }
+
+            /* Status styles */
+            .present,
+            .absent,
+            .out-of-office {
+                border: solid 1px currentColor;
+                border-left-width: 0.5rem;
+                border-radius: 5px;
+                padding: 0.125rem 0.25rem;
+                font-size: 0.75rem;
+            }
+
+            .present {
+                border-color: orange;
+            }
+
+            .absent {
+                border-color: red;
+            }
+
+            .out-of-office {
+                border-color: grey;
+            }
+        </style>
+
+        <link rel="stylesheet" href="/assets/styles.css" />
     </head>
 
     <body>
         <header>
-            <img alt="Automotief, Intus garage Utrecht" />
-            <span class="title">Medewerker administratie</span>
+            <div class="content flex">
+                <img alt="Automotief, Intus garage Utrecht" />
+                <span class="title">Medewerker administratie</span>
+            </div>
         </header>
-        <main></main>
+        <main>
+            <div class="content">
+                <div class="scrollview">
+                    <table id="table_employees">
+                        <thead>
+                            <tr>
+                                <th>Medewerker</th>
+                                <th>ID</th>
+                                <th>Functie</th>
+                                <th>In dienst</th>
+                                <th>Status</th>
+                                <th>Opmerking</th>
+                                <th>Salaris</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Saskia de Bruin</th>
+                                <td class="number">99</td>
+                                <td>Medewerker</td>
+                                <td>1-1-1986</td>
+                                <td class="status">
+                                    <span class="out-of-office">buiten</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.134</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Marina Fruithal</th>
+                                <td class="number">217</td>
+                                <td>Monteur</td>
+                                <td>25-7-2000</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td>Werkt vandaag aan de Volvo XC40</td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.381</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Coen Toermalijn</th>
+                                <td class="number">227</td>
+                                <td>Inkoop</td>
+                                <td>29-8-2019</td>
+                                <td class="status">
+                                    <span class="absent">afwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.712</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ton Deuse</th>
+                                <td class="number">360</td>
+                                <td>Medewerker</td>
+                                <td>25-3-2015</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.531</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Joyse Boekenlegger</th>
+                                <td class="number">432</td>
+                                <td>Spuiter</td>
+                                <td>16-2-2012</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.338</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Dino Kruiswijk</th>
+                                <td class="number">497</td>
+                                <td>Salaris administratie</td>
+                                <td>16-5-2012</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.467</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">David van Oldenbarneveld</th>
+                                <td class="number">519</td>
+                                <td>Medewerker</td>
+                                <td>1-4-1996</td>
+                                <td class="status">
+                                    <span class="absent">afwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.134</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Merel van Giesen</th>
+                                <td class="number">543</td>
+                                <td>Monteur</td>
+                                <td>12-9-2005</td>
+                                <td class="status">
+                                    <span class="out-of-office">buiten</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.188</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Sandra Anderson</th>
+                                <td class="number">591</td>
+                                <td>Sloper</td>
+                                <td>24-8-2017</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">1.876</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Koos Kastenmaker</th>
+                                <td class="number">600</td>
+                                <td>Medewerker</td>
+                                <td>29-11-2014</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.134</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Druze Saliman</th>
+                                <td class="number">601</td>
+                                <td>Inkoop</td>
+                                <td>17-3-2006</td>
+                                <td class="status">
+                                    <span class="absent">afwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.712</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Patrick van Bergenhenegouwe</th>
+                                <td class="number">631</td>
+                                <td>Administratie</td>
+                                <td>19-10-2011</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.136</span>
+                                </td>
+                            </tr>
+                            <tr class="inactive">
+                                <th scope="row">Freek Alexander</th>
+                                <td class="number">631</td>
+                                <td>Administratie</td>
+                                <td>20-12-2019</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.136</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Simone Bruinsma</th>
+                                <td class="number">737</td>
+                                <td>Manager</td>
+                                <td>7-10-2013</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">3.267</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ronnie Stuiverwaard</th>
+                                <td class="number">750</td>
+                                <td>Medewerker</td>
+                                <td>5-8-2015</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td>Volgende week op locatie</td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.244</span>
+                                </td>
+                            </tr>
+                            <tr class="inactive">
+                                <th scope="row">Koos Deuse</th>
+                                <td class="number">841</td>
+                                <td>Sloper</td>
+                                <td>11-10-2014</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">1.954</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Stephan Weezerik</th>
+                                <td class="number">871</td>
+                                <td>Sales</td>
+                                <td>6-7-2011</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td>Administratie bijwerken</td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.654</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Jacco Cornee</th>
+                                <td class="number">975</td>
+                                <td>Monteur</td>
+                                <td>19-4-2003</td>
+                                <td class="status">
+                                    <span class="out-of-office">buiten</span>
+                                </td>
+                                <td>Wagen ophalen</td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.251</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Bente Jansen</th>
+                                <td class="number">1000</td>
+                                <td>Senior Monteur</td>
+                                <td>8-1-2020</td>
+                                <td class="status">
+                                    <span class="out-of-office">buiten</span>
+                                </td>
+                                <td></td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.134</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Mark Ronson</th>
+                                <td class="number">1208</td>
+                                <td>Monteur</td>
+                                <td>22-6-1999</td>
+                                <td class="status">
+                                    <span class="present">aanwezig</span>
+                                </td>
+                                <td>Vandaag auto's aan het ophalen</td>
+                                <td class="number">
+                                    <span class="currency">€</span>
+                                    <span class="salary">2.268</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot role="presentation">
+                            <tr>
+                                <th>Medewerker</th>
+                                <th>ID</th>
+                                <th>Functie</th>
+                                <th>In dienst</th>
+                                <th>Status</th>
+                                <th>Opmerking</th>
+                                <th>Salaris</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <script id="script_employees">
+                // Data rendered by server
+                const context = {
+                    staff: [
+                        {
+                            name: "Ton",
+                            last_name: "Deuse",
+                            id: 360,
+                            employed_since: "2015-03-25",
+                            active: true,
+                        },
+                        {
+                            name: "Koos",
+                            last_name: "Deuse",
+                            id: 841,
+                            employed_since: "2014-10-11",
+                            active: false,
+                        },
+                        {
+                            name: "Sandra",
+                            last_name: "Anderson",
+                            id: 591,
+                            employed_since: "2017-08-24",
+                            active: true,
+                        },
+                        {
+                            name: "Joyse",
+                            last_name: "Boekenlegger",
+                            id: 432,
+                            employed_since: "2012-02-16",
+                            active: true,
+                        },
+                        {
+                            name: "Jacco",
+                            last_name: "Cornee",
+                            id: 975,
+                            employed_since: "2003-04-19",
+                            active: true,
+                        },
+                        {
+                            name: "Coen",
+                            last_name: "Toermalijn",
+                            id: 227,
+                            employed_since: "2019-08-29",
+                            active: true,
+                        },
+                        {
+                            name: "Druze",
+                            last_name: "Saliman",
+                            id: 601,
+                            employed_since: "2006-03-17",
+                            active: true,
+                        },
+                        {
+                            name: "Patrick",
+                            last_name: "van Bergenhenegouwe",
+                            id: 631,
+                            employed_since: "2011-10-19",
+                            active: true,
+                        },
+                        {
+                            name: "Ronnie",
+                            last_name: "Stuiverwaard",
+                            id: 750,
+                            employed_since: "2015-08-05",
+                            active: true,
+                        },
+                        {
+                            name: "Marina",
+                            last_name: "Fruithal",
+                            id: 217,
+                            employed_since: "2000-07-25",
+                            active: true,
+                        },
+                        {
+                            name: "Dino",
+                            last_name: "Kruiswijk",
+                            id: 497,
+                            employed_since: "2012-05-16",
+                            active: true,
+                        },
+                        {
+                            name: "Bente",
+                            last_name: "Jansen",
+                            id: 1000,
+                            employed_since: "2020-01-08",
+                            active: true,
+                        },
+                        {
+                            name: "Freek",
+                            last_name: "Alexander",
+                            id: 631,
+                            employed_since: "2019-12-20",
+                            active: false,
+                        },
+                        {
+                            name: "Simone",
+                            last_name: "Bruinsma",
+                            id: 737,
+                            employed_since: "2013-10-07",
+                            active: true,
+                        },
+                        {
+                            name: "David",
+                            last_name: "van Oldenbarneveld",
+                            id: 519,
+                            employed_since: "1996-04-01",
+                            active: true,
+                        },
+                        {
+                            name: "Koos",
+                            last_name: "Kastenmaker",
+                            id: 600,
+                            employed_since: "2014-11-29",
+                            active: true,
+                        },
+                        {
+                            name: "Stephan",
+                            last_name: "Weezerik",
+                            id: 871,
+                            employed_since: "2011-07-06",
+                            active: true,
+                        },
+                        {
+                            name: "Merel",
+                            last_name: "van Giesen",
+                            id: 543,
+                            employed_since: "2005-09-12",
+                            active: true,
+                        },
+                        {
+                            name: "Saskia",
+                            last_name: "de Bruin",
+                            id: 99,
+                            employed_since: "1986-01-01",
+                            active: true,
+                        },
+                        {
+                            name: "Mark",
+                            last_name: "Ronson",
+                            id: 1208,
+                            employed_since: "1999-06-22",
+                            active: true,
+                        },
+                    ],
+                    employmentDetails: [
+                        {
+                            id: 360,
+                            details: {
+                                function: "Medewerker",
+                                status: "aanwezig",
+                                salary: "2531",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 841,
+                            details: {
+                                function: "Sloper",
+                                status: "aanwezig",
+                                salary: "1954",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 591,
+                            details: {
+                                function: "Sloper",
+                                status: "aanwezig",
+                                salary: "1876",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 432,
+                            details: {
+                                function: "Spuiter",
+                                status: "aanwezig",
+                                salary: "2338",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 975,
+                            details: {
+                                function: "Monteur",
+                                status: "buiten",
+                                salary: "2251",
+                            },
+                            remark: "Wagen ophalen",
+                        },
+                        {
+                            id: 227,
+                            details: {
+                                function: "Inkoop",
+                                status: "afwezig",
+                                salary: "2712",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 601,
+                            details: {
+                                function: "Inkoop",
+                                status: "afwezig",
+                                salary: "2712",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 631,
+                            details: {
+                                function: "Administratie",
+                                status: "aanwezig",
+                                salary: "2136",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 750,
+                            details: {
+                                function: "Medewerker",
+                                status: "aanwezig",
+                                salary: "2244",
+                            },
+                            remark: "Volgende week op locatie",
+                        },
+                        {
+                            id: 217,
+                            details: {
+                                function: "Monteur",
+                                status: "aanwezig",
+                                salary: "2381",
+                            },
+                            remark: "Werkt vandaag aan de Volvo XC40",
+                        },
+                        {
+                            id: 497,
+                            details: {
+                                function: "Salaris administratie",
+                                status: "aanwezig",
+                                salary: "2467",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 1000,
+                            details: {
+                                function: "Senior Monteur",
+                                status: "buiten",
+                                salary: "2134",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 631,
+                            details: {
+                                function: "Monteur",
+                                status: "aanwezig",
+                                salary: "2188",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 737,
+                            details: {
+                                function: "Manager",
+                                status: "aanwezig",
+                                salary: "3267",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 519,
+                            details: {
+                                function: "Medewerker",
+                                status: "afwezig",
+                                salary: "2134",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 600,
+                            details: {
+                                function: "Medewerker",
+                                status: "aanwezig",
+                                salary: "2134",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 871,
+                            details: {
+                                function: "Sales",
+                                status: "aanwezig",
+                                salary: "2654",
+                            },
+                            remark: "Administratie bijwerken",
+                        },
+                        {
+                            id: 543,
+                            details: {
+                                function: "Monteur",
+                                status: "buiten",
+                                salary: "2188",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 99,
+                            details: {
+                                function: "Medewerker",
+                                status: "buiten",
+                                salary: "2134",
+                            },
+                            remark: "",
+                        },
+                        {
+                            id: 1208,
+                            details: {
+                                function: "Monteur",
+                                status: "aanwezig",
+                                salary: "2268",
+                            },
+                            remark: "Vandaag auto's aan het ophalen",
+                        },
+                    ],
+                };
+            </script>
+        </main>
     </body>
 </html>

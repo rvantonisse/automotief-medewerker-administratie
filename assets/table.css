@@ -1,0 +1,155 @@
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+table {
+    position: relative;
+    table-layout: fixed;
+    border: 0;
+
+    /*
+        Little styling quirk with this giving either weird border styling to th or trs.
+        The th border dissapears on scrolling or the tr borders are gone.
+        FIX: Move borders to cells (td)
+     */
+    /* border-collapse: collapse; */
+
+    border-spacing: 0;
+    min-width: 100%;
+    letter-spacing: 0;
+}
+
+thead,
+tbody,
+tfoot,
+tr {
+    min-width: 100%;
+}
+
+tbody {
+    white-space: nowrap;
+    overflow-y: auto;
+}
+
+tbody th {
+    font-weight: normal;
+}
+
+tr:not(tr:last-child)>th,
+tr:not(tr:last-child)>td {
+    border-bottom: solid 1px #ccc;
+}
+
+tr:nth-of-type(even)>th,
+tr:nth-of-type(even)>td {
+    background-color: #e6eef4;
+}
+
+tr:hover>th,
+tr:hover>td {
+    background-color: #c4e1a8;
+}
+
+tr.inactive>th,
+tr.inactive>td {
+    /* Darker color to meet accessible contrast; from #999 to #666 */
+    color: #666;
+    background-color: #eee;
+}
+
+thead th,
+tfoot th {
+    position: -webkit-sticky;
+    position: sticky;
+    border-top: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    background-color: #d7d7d7;
+    background: linear-gradient(to top, #d2d2d2, #e7e7e7 15%, #fdfdfd);
+    text-align: left;
+}
+
+thead th,
+tfoot th {
+    z-index: 2;
+}
+
+thead th {
+    top: 0;
+}
+
+tfoot th {
+    bottom: 0;
+}
+
+thead th:first-child,
+tfoot th:first-child {
+    border-left: solid 1px #d2d2d2;
+}
+
+thead th:last-child,
+tfoot th:last-child {
+    border-right: solid 1px #d2d2d2;
+}
+
+th,
+td {
+    padding: 0.25rem;
+    min-width: 3rem;
+    width: 1%;
+    max-width: 9rem;
+    text-align: left;
+}
+
+/* Visual border-spacing done with ::before */
+th:last-child,
+td:last-child {
+    padding-left: 1.25rem;
+}
+
+td:last-child {
+    position: relative;
+}
+
+th:last-child::before,
+td:last-child::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: calc(100% + 2px);
+    width: 1rem;
+    background-color: white;
+    z-index: 1;
+    border: solid 1px transparent;
+}
+
+td:last-child::before {
+    left: 1px;
+    width: calc(1rem - 2px);
+}
+
+thead th:last-child::before,
+tfoot th:last-child::before {
+    border-left: solid 1px #d2d2d2;
+    border-right: solid 1px #d2d2d2;
+}
+
+
+tbody th,
+td:not(td:last-child) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td.number,
+td.date {
+    text-align: right;
+}

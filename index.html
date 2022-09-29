@@ -128,6 +128,8 @@
             }
         </style>
 
+        <link rel="preload" href="/assets/table.css" as="style" />
+        <link rel="preload" href="/assets/table-pagination.js" as="script" />
         <link rel="stylesheet" href="/assets/styles.css" />
     </head>
 
@@ -140,7 +142,6 @@
         </header>
         <main>
             <div class="content">
-
                 <div class="table-control-panel">
                     <div class="table_paginator-options">
                         <label for="table_paginator-show_options">Toon</label>
@@ -149,7 +150,7 @@
                             <option value="16">16</option>
                         </select>
                         <span>regels</span>
-                    </div>       
+                    </div>
                 </div>
 
                 <div class="scrollview">
@@ -462,6 +463,7 @@
                 </div>
             </div>
 
+            <script src="/assets/table-pagination.js"></script>
             <script id="script_employees">
                 // Data rendered by server
                 const context = {
@@ -790,6 +792,9 @@
                         },
                     ],
                 };
+
+                // Load pagination
+                new TablePaginator("table_employees");
             </script>
         </main>
     </body>

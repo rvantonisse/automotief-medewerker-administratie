@@ -38,18 +38,26 @@ tbody {
     overflow-y: auto;
 }
 
+tbody th {
+    font-weight: normal;
+}
+
+tr:not(tr:last-child)>th,
 tr:not(tr:last-child)>td {
     border-bottom: solid 1px #ccc;
 }
 
+tr:nth-of-type(even)>th,
 tr:nth-of-type(even)>td {
     background-color: #e6eef4;
 }
 
+tr:hover>th,
 tr:hover>td {
     background-color: #c4e1a8;
 }
 
+tr.inactive>th,
 tr.inactive>td {
     /* Darker color to meet accessible contrast; from #999 to #666 */
     color: #666;
@@ -96,8 +104,10 @@ td {
     min-width: 3rem;
     width: 1%;
     max-width: 9rem;
+    text-align: left;
 }
 
+/* Visual border-spacing done with ::before */
 th:last-child,
 td:last-child {
     padding-left: 1.25rem;
@@ -107,7 +117,6 @@ td:last-child {
     position: relative;
 }
 
-/* Visual border-spacing done with ::before */
 th:last-child::before,
 td:last-child::before {
     content: "";
@@ -134,6 +143,7 @@ tfoot th:last-child::before {
 }
 
 
+tbody th,
 td:not(td:last-child) {
     overflow: hidden;
     text-overflow: ellipsis;

@@ -45,7 +45,7 @@
             result +
             `
                 <tr${isInactive ? ` class="inactive"` : ""}>
-                    <td>${member.name} ${member.last_name}</td>
+                    <th scope="row">${member.name} ${member.last_name}</th>
                     <td class="number">${member.id}</td>
                     <td>${member.function}</td>
                     <td>${new Date(member.employed_since).toLocaleDateString(
@@ -55,9 +55,9 @@
                 member.status
             }</span></td>
                     <td>${member.remark}</td>
-                    <td class="number"><span class="currency">€</span> <span class="salary">${
-                        new Number(member.salary).toLocaleString("nl")
-                    }</span></td>
+                    <td class="number"><span class="currency">€</span> <span class="salary">${new Number(
+                        member.salary
+                    ).toLocaleString("nl")}</span></td>
                 </tr>`
         );
     },

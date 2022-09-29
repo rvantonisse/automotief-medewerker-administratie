@@ -17,8 +17,9 @@ table {
     /*
         Little styling quirk with this giving either weird border styling to th or trs.
         The th border dissapears on scrolling or the tr borders are gone.
+        FIX: Move borders to cells (td)
      */
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
 
     border-spacing: 0;
     min-width: 100%;
@@ -29,7 +30,7 @@ thead,
 tbody,
 tfoot,
 tr {
-    width: 100%;
+    min-width: 100%;
 }
 
 tbody {
@@ -37,7 +38,7 @@ tbody {
     overflow-y: auto;
 }
 
-tr:not(tr:last-child) {
+tr:not(tr:last-child)>td {
     border-bottom: solid 1px #ccc;
 }
 
@@ -79,11 +80,22 @@ tfoot th {
     bottom: 0;
 }
 
+thead th:first-child,
+tfoot th:first-child {
+    border-left: solid 1px #d2d2d2;
+}
+
+thead th:last-child,
+tfoot th:last-child {
+    border-right: solid 1px #d2d2d2;
+}
+
 th,
 td {
     padding: 0.25rem;
     min-width: 3rem;
     width: 1%;
+    max-width: 9rem;
 }
 
 th:last-child,
@@ -113,16 +125,6 @@ td:last-child::before {
 td:last-child::before {
     left: 1px;
     width: calc(1rem - 2px);
-}
-
-thead th:first-child,
-tfoot th:first-child {
-    border-left: solid 1px #d2d2d2;
-}
-
-thead th:last-child,
-tfoot th:last-child {
-    border-right-color: #d2d2d2;
 }
 
 thead th:last-child::before,

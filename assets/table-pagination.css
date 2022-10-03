@@ -1,0 +1,43 @@
+/* table-pagination styles */
+#table_paginator-pagination ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    border: solid 1px #d2d2d2;
+    padding: 0;
+    list-style-type: none;
+}
+
+#table_paginator-pagination li+li {
+    border-left: solid 1px #d2d2d2;
+}
+
+#table_paginator-pagination button {
+    display: block;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    padding: 0.5em 1em;
+
+    /* Enhanced contrast for accessibility */
+    color: #36759a;
+    background-color: white;
+    cursor: pointer;
+}
+
+#table_paginator-pagination button.disabled,
+#table_paginator-pagination button[disabled] {
+    pointer-events: none;
+    color: #777;
+    text-decoration: line-through;
+}
+
+#table_paginator-pagination button:hover,
+#table_paginator-pagination button:focus-visible {
+    outline: none;
+    color: white;
+    background-color: #36759a;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}

@@ -30,6 +30,11 @@
 #table_paginator-pagination button[disabled] {
     pointer-events: none;
     color: #777;
+
+    /**
+     * Accessibility: color-alone
+     * Make state change between buttons visual
+     */
     text-decoration: line-through;
 }
 
@@ -38,6 +43,11 @@
     outline: none;
     color: white;
     background-color: #36759a;
-    text-decoration: underline;
+
+    /**
+     * Accessibility: color-alone
+     * Make state change between buttons visual
+     */
+     text-decoration: underline;
     text-underline-offset: 3px;
 }

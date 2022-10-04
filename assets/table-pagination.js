@@ -34,8 +34,9 @@ const TablePaginator = (function () {
 
         initiate() {
             const self = this;
+            const initialRange = this.$rangeSelector.value || 0;
 
-            self.divideRows();
+            self.divideRows(initialRange);
             self.renderTable();
 
             // Events

@@ -6,6 +6,11 @@
 const TablePaginator = (function () {
     const OPTIONS = [0, 16];
 
+    const _$paginationTemplate = document.createElement("template");
+    _$paginationTemplate.innerHTML = `
+        <ul><li><button type="button" value="__PAGE_TITLE__">__PAGE_TITLE__</button></li></ul>
+    `;
+
     class _TablePaginator {
         constructor($table) {
             if (!$table) return;
@@ -15,6 +20,9 @@ const TablePaginator = (function () {
             this.$table = document.getElementById($table);
             this.$rangeSelector = document.getElementById(
                 "table_paginator-show_options"
+            );
+            this.$navigation = document.getElementById(
+                "table_paginator-pagination"
             );
 
             this.dataRows = Array.from(this.$table.rows)
@@ -37,14 +45,25 @@ const TablePaginator = (function () {
             const initialRange = this.$rangeSelector.value || 0;
 
             self.divideRows(initialRange);
-            self.renderTable();
+            self.render();
 
             // Events
             this.$rangeSelector.addEventListener(
                 "change",
                 function handleChange(event) {
                     self.divideRows(event.target.value);
-                    self.renderTable();
+                    self.render();
+                }
+            );
+
+            this.$navigation.addEventListener(
+                "click",
+                function handleClick(event) {
+                    const $target = event.target;
+
+                    if ($target.nodeName === "BUTTON") {
+                        self.openPage($target.value);
+                    }
                 }
             );
         }
@@ -74,6 +93,11 @@ const TablePaginator = (function () {
             this.pages = division.slice();
         }
 
+        render() {
+            this.renderTable();
+            this.renderPagination();
+        }
+
         renderTable() {
             const pageCount = this.pages.length;
 
@@ -90,8 +114,49 @@ const TablePaginator = (function () {
                     .map((row) => row.outerHTML)
                     .join("\n");
 
+                if (index !== 0) {
+                    tableBodyPart.setAttribute("hidden", "");
+                }
+
                 this.$table.insertBefore(tableBodyPart, this.$table.tFoot);
             }
+        }
+
+        renderPagination() {
+            const $previousContainer = this.$navigation.firstChild;
+            const $optionContainer = _$paginationTemplate.content
+                .querySelector("ul")
+                .cloneNode(true);
+            const $optionTemplate =
+                $optionContainer.querySelector("li").outerHTML;
+
+            $optionContainer.innerHTML = this.pages
+                .map(function createPagination(page, index) {
+                    return $optionTemplate.replace(
+                        /__PAGE_TITLE__/g,
+                        index + 1
+                    );
+                })
+                .join("");
+
+            this.$navigation.replaceChild($optionContainer, $previousContainer);
+        }
+
+        openPage(pageNumber) {
+            const pageIndex = pageNumber - 1;
+
+            Array.prototype.forEach.call(
+                this.$table.tBodies,
+                function toggleVisibility($tBody, index) {
+                    const tbodyIndex = parseInt($tBody.dataset.pageIndex, 10);
+
+                    if (tbodyIndex === pageIndex) {
+                        $tBody.removeAttribute("hidden");
+                    } else {
+                        $tBody.setAttribute("hidden", "");
+                    }
+                }
+            );
         }
     }
 

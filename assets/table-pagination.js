@@ -6,9 +6,18 @@
 const TablePaginator = (function () {
     const OPTIONS = [0, 16];
 
-    const _$paginationTemplate = document.createElement("template");
-    _$paginationTemplate.innerHTML = `
-        <ul><li><button type="button" value="__PAGE_TITLE__">__PAGE_TITLE__</button></li></ul>
+    const _$paginationTemplate = html`
+        <ul>
+            <li>
+                <button type="button" value="__PAGE_TITLE__">
+                    __PAGE_TITLE__
+                </button>
+            </li>
+        </ul>
+    `;
+
+    const _$paginationInfoTemplate = html`
+        <span>${"#"} tot en met ${"##"} van ${"###"} gegevens zichtbaar.</span>
     `;
 
     class _TablePaginator {
@@ -21,6 +30,7 @@ const TablePaginator = (function () {
             this.$rangeSelector = document.getElementById(
                 "table_paginator-show_options"
             );
+            this.$info = document.getElementById("table_paginator-info");
             this.$navigation = document.getElementById(
                 "table_paginator-pagination"
             );
@@ -35,23 +45,26 @@ const TablePaginator = (function () {
                     });
                 });
             this.pages = [];
-            this.activePage = 0;
+            this.activePageIndex = 0;
+            this.divisionRange = parseInt(this.$rangeSelector.value, 10);
 
             this.initiate();
         }
 
         initiate() {
             const self = this;
-            const initialRange = this.$rangeSelector.value || 0;
 
-            self.divideRows(initialRange);
-            self.render();
+            this.$table.setAttribute("aria-describedby", this.$info.id);
 
             // Events
             this.$rangeSelector.addEventListener(
                 "change",
                 function handleChange(event) {
-                    self.divideRows(event.target.value);
+                    const newRange = event.target.value;
+
+                    self.divisionRange = newRange;
+
+                    self.divideRows(newRange);
                     self.render();
                 }
             );
@@ -63,12 +76,20 @@ const TablePaginator = (function () {
 
                     if ($target.nodeName === "BUTTON") {
                         self.openPage($target.value);
+                        $target
+                            .closest("ul")
+                            .querySelector("button.active")
+                            .classList.toggle("active");
+                        $target.classList.toggle("active");
                     }
                 }
             );
+
+            self.divideRows(this.divisionRange);
+            self.render();
         }
 
-        divideRows(rowAmount = 16) {
+        divideRows(rowAmount = 0) {
             const ROWS_PER_PAGE = rowAmount;
             const _rows = this.dataRows.slice();
             const rowCount = _rows.length;
@@ -95,6 +116,7 @@ const TablePaginator = (function () {
 
         render() {
             this.renderTable();
+            this.renderInfo();
             this.renderPagination();
         }
 
@@ -123,27 +145,64 @@ const TablePaginator = (function () {
         }
 
         renderPagination() {
+            const self = this;
             const $previousContainer = this.$navigation.firstChild;
-            const $optionContainer = _$paginationTemplate.content
-                .querySelector("ul")
-                .cloneNode(true);
+            const $optionContainer = _$paginationTemplate().querySelector("ul");
             const $optionTemplate =
-                $optionContainer.querySelector("li").outerHTML;
+                $optionContainer.querySelector("li");
 
             $optionContainer.innerHTML = this.pages
                 .map(function createPagination(page, index) {
-                    return $optionTemplate.replace(
+                    const $option = $optionTemplate.cloneNode(true);
+
+                    if (index === self.activePageIndex) {
+                        $option
+                            .querySelector("button")
+                            .classList.add("active");
+                    }
+                    return $option.outerHTML.replace(
                         /__PAGE_TITLE__/g,
                         index + 1
                     );
                 })
                 .join("");
 
-            this.$navigation.replaceChild($optionContainer, $previousContainer);
+            if ($previousContainer) {
+                this.$navigation.replaceChild(
+                    $optionContainer,
+                    $previousContainer
+                );
+            } else {
+                this.$navigation.appendChild($optionContainer);
+            }
+        }
+
+        renderInfo() {
+            const _$info = _$paginationInfoTemplate();
+            const { activePageIndex, divisionRange } = this;
+            const totalRows = this.dataRows.length;
+            const firstRow = 1 + activePageIndex * divisionRange;
+            const lastRow = firstRow + this.pages[activePageIndex].length - 1;
+            const infoString = _$info.textContent
+                .replace("#", firstRow)
+                .replace("##", lastRow)
+                .replace("###", totalRows);
+
+            _$info.firstChild.innerHTML = infoString;
+
+            this.$info.innerHTML = "";
+            this.$info.appendChild(_$info);
         }
 
         openPage(pageNumber) {
             const pageIndex = pageNumber - 1;
+            const previousPageIndex = this.activePageIndex;
+
+            if (pageIndex === previousPageIndex) {
+                return;
+            }
+
+            this.activePageIndex = pageIndex;
 
             Array.prototype.forEach.call(
                 this.$table.tBodies,
@@ -157,7 +216,19 @@ const TablePaginator = (function () {
                     }
                 }
             );
+
+            this.renderInfo();
         }
+    }
+
+    function html(strings, ...values) {
+        const $template = document.createElement("template");
+        $template.innerHTML = String.raw(strings, ...values).replace(
+            /\s{2,}/g,
+            ""
+        );
+
+        return () => $template.content.cloneNode(true);
     }
 
     return _TablePaginator;

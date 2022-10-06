@@ -26,6 +26,14 @@ table {
     letter-spacing: 0;
 }
 
+caption {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    z-index: 0;
+    color: transparent;
+}
+
 thead,
 tbody,
 tfoot,
@@ -45,6 +53,11 @@ tbody th {
 tr:not(tr:last-child)>th,
 tr:not(tr:last-child)>td {
     border-bottom: solid 1px #ccc;
+}
+
+tr:nth-of-type(odd)>th,
+tr:nth-of-type(odd)>td {
+    background-color: inherit;
 }
 
 tr:nth-of-type(even)>th,

@@ -1,0 +1,66 @@
+/* table-pagination styles */
+.table_paginator-options select {
+    margin: 0.5rem;
+    border-radius: 5px;
+    border-width: 1px;
+
+    /* REVIEW: Higher contrast due to accessibility requirements */
+    border-color: #888;
+    padding: 0.25rem;
+    font-size: 1.25rem;
+    color: inherit;
+}
+
+#table_paginator-pagination ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    border: solid 1px #d2d2d2;
+    padding: 0;
+    list-style-type: none;
+}
+
+#table_paginator-pagination li+li {
+    border-left: solid 1px #d2d2d2;
+}
+
+#table_paginator-pagination button {
+    display: block;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    padding: 0.5em 1em;
+
+    /* Enhanced contrast for accessibility */
+    color: #36759a;
+    background-color: white;
+    cursor: pointer;
+}
+
+#table_paginator-pagination button.disabled,
+#table_paginator-pagination button[disabled] {
+    pointer-events: none;
+    color: #777;
+
+    /**
+     * Accessibility: color-alone
+     * Make state change between buttons visual
+     */
+    text-decoration: line-through;
+}
+
+#table_paginator-pagination button:hover,
+#table_paginator-pagination button:focus-visible,
+#table_paginator-pagination button.active {
+    outline: none;
+    color: white;
+    background-color: #36759a;
+
+    /**
+     * Accessibility: color-alone
+     * Make state change between buttons visual
+     */
+     text-decoration: underline;
+    text-underline-offset: 3px;
+}

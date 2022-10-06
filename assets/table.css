@@ -26,6 +26,14 @@ table {
     letter-spacing: 0;
 }
 
+caption {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    z-index: 0;
+    color: transparent;
+}
+
 thead,
 tbody,
 tfoot,
@@ -47,6 +55,11 @@ tr:not(tr:last-child)>td {
     border-bottom: solid 1px #ccc;
 }
 
+tr:nth-of-type(odd)>th,
+tr:nth-of-type(odd)>td {
+    background-color: inherit;
+}
+
 tr:nth-of-type(even)>th,
 tr:nth-of-type(even)>td {
     background-color: #e6eef4;
@@ -59,7 +72,7 @@ tr:hover>td {
 
 tr.inactive>th,
 tr.inactive>td {
-    /* Darker color to meet accessible contrast; from #999 to #666 */
+    /* REVIEW: Darker color to meet accessible contrast with background; from #999 to #666 */
     color: #666;
     background-color: #eee;
 }
@@ -152,4 +165,10 @@ td:not(td:last-child) {
 td.number,
 td.date {
     text-align: right;
+}
+
+.table-control-panel {
+    margin-top: 1rem;
+    margin-block-start: 1rem;
+    padding: 0 1rem;
 }

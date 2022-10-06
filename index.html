@@ -20,8 +20,6 @@
 
             body {
                 font-family: system-ui, sans-serif;
-                letter-spacing: 0.2rem;
-                word-spacing: 0.1rem;
                 line-height: 1.5;
                 color: #363636;
                 background-color: #fff;
@@ -32,6 +30,8 @@
                 padding-block-start: 2rem;
                 padding-block-end: 1rem;
                 padding-inline: 2.5rem;
+                letter-spacing: 0.2rem;
+                word-spacing: 0.1rem;
                 background-color: #ba5672;
                 background-image: linear-gradient(
                     20deg,
@@ -128,7 +128,12 @@
             }
         </style>
 
-        <link rel="stylesheet" href="./assets/styles.css" />
+        <!-- Preloads -->
+        <link rel="preload" href="/assets/table.css" as="style" />
+        <link rel="preload" href="/assets/table-pagination.css" as="style" />
+        <link rel="preload" href="/assets/table-pagination.js" as="script" />
+
+        <link rel="stylesheet" href="/assets/styles.css" />
     </head>
 
     <body>
@@ -140,8 +145,21 @@
         </header>
         <main>
             <div class="content">
+                <div class="table-control-panel">
+                    <div class="table_paginator-options">
+                        <label for="table_paginator-show_options">Toon</label>
+                        <select id="table_paginator-show_options">
+                            <option value="0">alle</option>
+                            <option value="10">10</option>
+                            <option value="16">16</option>
+                        </select>
+                        <span>regels</span>
+                    </div>
+                </div>
+
                 <div class="scrollview" tabindex="0">
                     <table id="table_employees">
+                        <caption>Medewerker administratie</caption>
                         <thead>
                             <tr>
                                 <th>Medewerker</th>
@@ -448,8 +466,15 @@
                         </tfoot>
                     </table>
                 </div>
+
+                <div class="table-control-panel flex">
+                    <div role="alert" id="table_paginator-info"></div>
+
+                    <div id="table_paginator-pagination"></div>
+                </div>
             </div>
 
+            <script src="/assets/table-pagination.js"></script>
             <script id="script_employees">
                 // Data rendered by server
                 const context = {
@@ -778,6 +803,9 @@
                         },
                     ],
                 };
+
+                // Load pagination
+                new TablePaginator("table_employees");
             </script>
         </main>
     </body>

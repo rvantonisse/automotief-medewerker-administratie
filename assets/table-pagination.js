@@ -145,6 +145,13 @@ const TablePaginator = (function () {
         }
 
         renderPagination() {
+
+            if (this.pages.length === 1) {
+                this.$navigation.setAttribute("hidden", "");
+            } else {
+                this.$navigation.removeAttribute("hidden");
+            }
+
             const self = this;
             const $previousContainer = this.$navigation.firstChild;
             const $optionContainer = _$paginationTemplate().querySelector("ul");

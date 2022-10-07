@@ -51,7 +51,7 @@
 }
 
 #table_paginator-pagination button:hover,
-#table_paginator-pagination button:focus-visible,
+#table_paginator-pagination button:focus,
 #table_paginator-pagination button.active {
     outline: none;
     color: white;
